@@ -17,7 +17,7 @@ public class TodoController(TodoService service) : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetByIdAsync(int id)
+    public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
     {
         var dto = await service.GetByIdAsync(id);
 
@@ -25,7 +25,7 @@ public class TodoController(TodoService service) : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(TodoDto dto)
+    public async Task<IActionResult> CreateAsync([FromBody] TodoDto dto)
     {
         dto = await service.CreateAsync(dto);
 
@@ -33,7 +33,7 @@ public class TodoController(TodoService service) : ControllerBase
     }
 
     [HttpPut("{id:int}")]
-    public async Task<IActionResult> UpdateAsync(int id, TodoDto dto)
+    public async Task<IActionResult> UpdateAsync([FromRoute] int id, [FromBody] TodoDto dto)
     {
         dto = await service.UpdateAsync(id, dto);
 
@@ -41,7 +41,7 @@ public class TodoController(TodoService service) : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<IActionResult> DeleteByIdAsync(int id)
+    public async Task<IActionResult> DeleteByIdAsync([FromRoute] int id)
     {
         await service.DeleteByIdAsync(id);
 
